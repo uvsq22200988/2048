@@ -16,13 +16,15 @@ racine.title("2048")
 #faire une matrice 4*4
 matrice= [[0]*4 for e in range (5)]
 
+
+#créer le carré de jeu
 def start_2048():
-    #créer le carré de jeu
+   
     canvas.create_rectangle((H_2, L_2), get_color="grey")
 
 
 
-#créer un un quadrillage pour séparer les différentes cases du jeu
+#créer un un quadrillage pour séparer les différentes tuiles du jeu
 for e in range (1,5):
     canvas.create_line()
     canvas.create_line()
