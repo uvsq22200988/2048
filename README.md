@@ -13,7 +13,7 @@
 
 # Membres 
 TD1 BI Groupe 2 
-Lien https://github.com/uvsq22102970/2048
+Lien: https://github.com/uvsq22102970/2048
 Pierre-Antoine HENRY 22102970
 Nicolas Jaffard 22203543
 Louise Zhou 22205604
