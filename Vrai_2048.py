@@ -7,44 +7,20 @@ H_1= 800
 L_1= 1000
 H_2= 700
 L_2= 700
-
+#création de la fenêtre
 racine= tk.Tk()
-canvas=tk.Canvas(racine,background="couleur",height= H_1, width= L_1)
+canvas=tk.Canvas(racine,background="grey",height= H_1, width= L_1)
 racine.title("2048")
-
+#lancement de la boucle principale
+racine.mainloop()
+#Création widget start (pour commencer le jeu) afin d'emmener le joueur sur la page de jeu
+boutton_start= tk.Button(racine, text= "JOUER", "RENTRER UN PARAMETRE ")
+boutton_start.pack()
+#création du menu comprenant les infos suivantes : score, meilleure score, nouvelle partie
 
 #faire une matrice 4*4
 matrice= [[0]*4 for e in range (5)]
 
-
-#créer le carré de jeu
-def start_2048():
-   
-    canvas.create_rectangle((H_2, L_2), get_color="grey")
-
-
-
-#créer un un quadrillage pour séparer les différentes tuiles du jeu
-for e in range (1,5):
-    canvas.create_line()
-    canvas.create_line()
-
-   
-   
-import tkinter as tk
-
-# Création de la fenêtre racine
-racine = tk.Tk() 
-# ajoute un titre
-racine.title("affichage") 
-# création du widget
-label = tk.Label(racine, text="affichage", font=("helvetica", "20")) 
-# positionnement du widget
-label.grid() 
-# modification des paramètres du widget
-label.config(text="2048", bg="gold") 
-# Lancement de la boucle principale
-racine.mainloop()
 
 
 #definir les actions
@@ -91,3 +67,4 @@ def move(ligne):
        ###on s'assure ue les fusion ne deforme pas la matrice
        assert len(new_row) == len(ligne)
        return new_row
+   
