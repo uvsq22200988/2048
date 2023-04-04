@@ -28,3 +28,20 @@ def start_2048():
 for e in range (1,5):
     canvas.create_line()
     canvas.create_line()
+
+   
+   
+import tkinter as tk
+
+# Création de la fenêtre racine
+racine = tk.Tk() 
+# ajoute un titre
+racine.title("affichage") 
+# création du widget
+label = tk.Label(racine, text="affichage", font=("helvetica", "20")) 
+# positionnement du widget
+label.grid() 
+# modification des paramètres du widget
+label.config(text="2048", bg="gold") 
+# Lancement de la boucle principale
+racine.mainloop()
