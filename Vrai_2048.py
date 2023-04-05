@@ -29,9 +29,9 @@ actions = ["up", "down","left","right","restart","exit"]
 
 #definir le jeu
 def jeu():
-   if action == "restart":
+   if actions == "restart":
        return "Init"
-   if action == "exit":
+   if actions == "exit":
        return " exit"
        if le joueur a gagné:
            return "Win"
