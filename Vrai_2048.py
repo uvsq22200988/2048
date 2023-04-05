@@ -13,14 +13,18 @@ canvas=tk.Canvas(racine,background="grey",height= H_1, width= L_1)
 racine.title("2048")
 #lancement de la boucle principale
 racine.mainloop()
-#Création widget start (pour commencer le jeu) afin d'emmener le joueur sur la page de jeu
-boutton_start= tk.Button(racine, text= "JOUER", "RENTRER UN PARAMETRE ")
-boutton_start.pack()
-#création du menu comprenant les infos suivantes : score, meilleure score, nouvelle partie
-
 #faire une matrice 4*4
-matrice= [[0]*4 for e in range (5)]
+matrice= [[0 for j in range(4)] for i in range(4)]
+def start_2048():
+    if start_2048:
+        canvas.create_rectangle((200,200),(50,60))
+        matrice= [[0 for j in range(4)] for i in range(4)] #faire une matrice 4*4
 
+#Création widget start (pour commencer le jeu) afin d'emmener le joueur sur la page de jeu
+boutton_start= tk.Button(racine, text= "JOUER", bg= "orange",font= "200",command= start_2048)
+boutton_start.pack()
+
+#création du menu comprenant les infos suivantes : score, meilleure score, nouvelle partie
 
 
 #definir les actions
