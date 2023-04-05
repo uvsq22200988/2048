@@ -11,9 +11,6 @@ L_2= 700
 racine= tk.Tk()
 canvas=tk.Canvas(racine,background="grey",height= H_1, width= L_1)
 racine.title("2048")
-#lancement de la boucle principale
-#faire une matrice 4*4
-matrice= [[0 for j in range(4)] for i in range(4)]
 def start_2048():
     if start_2048:
         canvas.create_rectangle((200,200),(50,60))
