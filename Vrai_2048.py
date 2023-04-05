@@ -12,7 +12,7 @@ canvas=tk.Canvas(racine,background="light grey",height= H_1, width= L_1)
 canvas.grid(column= 1, row= 1)
 racine.title("2048")
 
-#création de l'espace de jeu
+
 def start_2048():
     if start_2048:
         canvas.create_rectangle((H_1/2,L_1/2),(40, 40), width= 4)
@@ -21,6 +21,8 @@ def start_2048():
 #Création widget start (pour commencer le jeu) afin d'emmener le joueur sur la page de jeu
 boutton_start= tk.Button(racine, text= "JOUER", bg= "orange",font= "200",command= start_2048)
 boutton_start.grid(column= 1, row= 0)
+#création de l'espace de jeu
+
 
 #création du menu comprenant les infos suivantes : score, meilleure score, nouvelle partie
 
