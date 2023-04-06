@@ -79,3 +79,17 @@ def move(ligne):
        assert len(new_row) == len(ligne)
        return new_row
    racine.mainloop()
+    
+    
+from tkinter import *
+
+matrice=[[0, 0, 0, 0],
+       [0, 0, 0, 0],
+       [0, 0, 0, 0],
+       [0, 0, 0, 0]]
+
+FONT=('Ubuntu', 27, 'bold')
+jeux2048=Tk()
+canvas=Canvas(background='white',height = 800, width = 800)
+canvas.pack()
+jeux2048.title("2048")
