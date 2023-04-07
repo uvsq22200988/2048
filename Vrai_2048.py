@@ -3,7 +3,7 @@
 import tkinter as tk
 import random as rd
 
-#Création de la matrice 4x4 vide
+
 matrice=[[0, 0, 0, 0],
        [0, 0, 0, 0],
        [0, 0, 0, 0],
@@ -18,21 +18,30 @@ canvas= tk.Canvas(racine,background='white',height = 800, width = 800)
 canvas.grid(column=1, row= 1)
 racine.title("2048")
 
+def start_2048():
+    for i in range(4):
+        for j in range(4):
+            a, b=200*j, 200*i
+            A, B, C=(a, b), (a+200, b+200), (a+100, b+100)
+        canvas.create_rectangle(A, B, fill='darkgrey')
+        canvas.create_text(C, text=matrice[i][j], fill ='white', font=FONT)
+
+#Création widget start (pour commencer le jeu) afin d'emmener le joueur sur la page de jeu
+boutton_start= tk.Button(racine, text= "JOUER", bg= "orange",font= "200",command= start_2048)
+boutton_start.grid(column= 1, row= 1)
 
 
 
     
-#Création widget start (pour commencer le jeu) afin d'emmener le joueur sur la page de jeu
+
 
 #création de l'espace de jeu
 
 
 #création du menu comprenant les infos suivantes : score, meilleure score, nouvelle partie
-
-
-#lancement de la boucle principale
-racine.mainloop()
-
+def menu():
+    score= tk.Menu(canvas, bg= "yellow",fg= "black", font= "300", command= boutton_start)
+    score.grid(column= 1, row= 1, padx= 600)
 
 #création du menu comprenant les infos suivantes : score, meilleure score, nouvelle partie
 
