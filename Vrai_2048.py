@@ -4,6 +4,19 @@ import tkinter as tk
 import random as rd
 
 
+matrice=[[0, 0, 0, 0],
+       [0, 0, 0, 0],
+       [0, 0, 0, 0],
+       [0, 0, 0, 0]]
+
+
+racine= tk.Tk()
+FONT=('Ubuntu', 75, 'bold')
+
+
+canvas= tk.Canvas(racine,background='white',height = 800, width = 800)
+canvas.grid(column=1, row= 1)
+racine.title("2048")
 
 
 
@@ -69,17 +82,3 @@ def move(ligne):
        assert len(new_row) == len(ligne)
        return new_row
    racine.mainloop()
-    
-    
-from tkinter import *
-
-matrice=[[0, 0, 0, 0],
-       [0, 0, 0, 0],
-       [0, 0, 0, 0],
-       [0, 0, 0, 0]]
-
-FONT=('Ubuntu', 27, 'bold')
-jeux2048=Tk()
-canvas=Canvas(background='white',height = 800, width = 800)
-canvas.pack()
-jeux2048.title("2048")
