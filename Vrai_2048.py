@@ -3,21 +3,20 @@
 import tkinter as tk
 import random as rd
 
-
+# Création de la matrice 4x4 vide
 matrice=[[0, 0, 0, 0],
        [0, 0, 0, 0],
        [0, 0, 0, 0],
        [0, 0, 0, 0]]
 
-
+# Création de la fênetre 
 racine= tk.Tk()
 FONT=('Ubuntu', 75, 'bold')
-
-
 canvas= tk.Canvas(racine,background='white',height = 800, width = 800)
 canvas.grid(column=1, row= 1)
 racine.title("2048")
 
+# Création de la fonction permettant de lancer le jeux 
 def start_2048():
     for i in range(4):
         for j in range(4):
