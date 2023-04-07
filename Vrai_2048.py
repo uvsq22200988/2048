@@ -3,7 +3,7 @@
 import tkinter as tk
 import random as rd
 
-
+#Création de la matrice 4x4 vide
 matrice=[[0, 0, 0, 0],
        [0, 0, 0, 0],
        [0, 0, 0, 0],
