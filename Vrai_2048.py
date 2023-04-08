@@ -90,3 +90,40 @@ def move(ligne):
        assert len(new_row) == len(ligne)
        return new_row
    racine.mainloop()
+       
+       
+       
+       
+       
+       
+       
+       
+       
+# GENERER UN NOMBRE AL2ATOIRE  
+       
+import random
+
+chiffre_aleatoire = random.randint (0,10)
+
+if chiffre_aleatoire <= 9 :
+    print(2)
+else : 
+    print(4)
+    
+
+# Création d'une liste qui parcourt la matrice permettant de trouver les positions des zéros de cette matrice
+positions_des_zeros = [(i, j) for i, row in enumerate(matrice) for j, element in enumerate(row) if element == 0]
+
+print(positions_des_zeros)
+
+
+def add_number(matrice, positions_des_zeros, print):
+    # On choisit une position au hasard dans la liste positions_des_zeros
+    position = random.choice(positions_des_zeros)
+    
+    # On ajoute le nombre à la position choisie dans la matrice
+    matrice[position[0]][position[1]] = print
+    
+    # On retourne la matrice modifiée
+    return matrice
+ 
