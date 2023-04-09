@@ -99,12 +99,12 @@ def move(ligne):
        
        
        
-# GENERER UN NOMBRE AL2ATOIRE  
+# GENERER UN NOMBRE ALEATOIRE  
        
 import random
-
+# Générer un nombre aléatoire en 0 et 10 nous permettant de savoir si nous faisons apparaitre un 2 ou un 4 
 chiffre_aleatoire = random.randint (0,10)
-
+#Le chiffre 2 a 90% de chance d'être obtenu alors que le 4 seulement 10% 
 if chiffre_aleatoire <= 9 :
     print(2)
 else : 
@@ -117,11 +117,11 @@ positions_des_zeros = [(i, j) for i, row in enumerate(matrice) for j, element in
 print(positions_des_zeros)
 
 
-def add_number(matrice, positions_des_zeros, print):
+def ajouter_chiifre_aleatoire (matrice, positions_des_zeros, print):
     # On choisit une position au hasard dans la liste positions_des_zeros
     position = random.choice(positions_des_zeros)
     
-    # On ajoute le nombre à la position choisie dans la matrice
+    # On ajoute le chiffre à la position choisie dans la matrice
     matrice[position[0]][position[1]] = print
     
     # On retourne la matrice modifiée
