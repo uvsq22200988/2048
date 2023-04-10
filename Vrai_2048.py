@@ -24,6 +24,45 @@ def start_2048():
             A, B, C=(a, b), (a+200, b+200), (a+100, b+100)
         canvas.create_rectangle(A, B, fill='darkgrey')
         canvas.create_text(C, text=matrice[i][j], fill ='white', font=FONT)
+              
+              
+              
+              
+# Création de la grille
+grille = [[0 for e in range(Taille_grille)] for e in range(Taille_grille)]
+
+#ajout de nouvelles tuiles
+def ajout_nouvelle_tuille():
+    chiffre_aleatoire = random.randint (0,10)
+    #Le chiffre 2 a 90% de chance d'être obtenu alors que le 4 seulement 10% 
+    if chiffre_aleatoire <= 9 :
+        print(2)
+    else : 
+        print(4)
+    tuille_vide=  [(i, j) for i in range(Taille_grille) for j in range(Taille_grille) if grid[i][j] == 0]
+    if tuille_vide:
+        row, col= random.choice(tuille_vide)
+        grille[row][col]= chiffre_aleatoire
+
+#afficher la mise à jour de la grille
+def MAJ_grille():
+    for i in range(Taille_grille):
+        for j in range(Taille_grille):
+            valeur= grille[i][j]
+            if valeur== 0:
+                 couleur_tuile= ""
+            else:
+                tuile_label= tk.Label(racine, text= str(valeur), font= FONT,bg= "UNE CERTAINE COULEURE")
+                tuile_label.grid(row=i, column=j, padx=5, pady=5)
+
+def fusion_des_tuiles():
+    #Fusionner les tuiles de même valeur dans une même direction
+    for i in range(Taille_grille):
+        for j in range(Taille_grille - 1):
+            if grid[i][j] == grid[i][j+1]:
+                grid[i][j] *= 2
+                grid[i][j+1] = 0
+    MAJ_grille
 
 #Création widget start (pour commencer le jeu) afin d'emmener le joueur sur la page de jeu
 boutton_start= tk.Button(racine, text= "JOUER", bg= "orange",font= "200",command= start_2048)
@@ -34,7 +73,7 @@ boutton_start.grid(column= 1, row= 1)
     
 
 
-#création de l'espace de jeu
+
 
 
 #création du menu comprenant les infos suivantes : score, meilleure score, nouvelle partie
@@ -97,18 +136,6 @@ def move(ligne):
        
        
        
-       
-       
-# GENERER UN NOMBRE ALEATOIRE  
-       
-import random
-# Générer un nombre aléatoire en 0 et 10 nous permettant de savoir si nous faisons apparaitre un 2 ou un 4 
-chiffre_aleatoire = random.randint (0,10)
-#Le chiffre 2 a 90% de chance d'être obtenu alors que le 4 seulement 10% 
-if chiffre_aleatoire <= 9 :
-    print(2)
-else : 
-    print(4)
     
 
 # Création d'une liste qui parcourt la matrice permettant de trouver les positions des zéros de cette matrice
@@ -117,7 +144,7 @@ positions_des_zeros = [(i, j) for i, row in enumerate(matrice) for j, element in
 print(positions_des_zeros)
 
 
-def ajouter_chiifre_aleatoire (matrice, positions_des_zeros, print):
+def ajouter_chifre_aleatoire (matrice, positions_des_zeros, print):
     # On choisit une position au hasard dans la liste positions_des_zeros
     position = random.choice(positions_des_zeros)
     
