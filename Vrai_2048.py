@@ -64,14 +64,6 @@ def fusion_des_tuiles():
                 grid[i][j+1] = 0
     MAJ_grille
 
-#Création widget start (pour commencer le jeu) afin d'emmener le joueur sur la page de jeu
-boutton_start= tk.Button(racine, text= "JOUER", bg= "orange",font= "200",command= start_2048)
-boutton_start.grid(column= 1, row= 1)
-
-
-
-    
-
 
 
 
