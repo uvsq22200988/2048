@@ -59,9 +59,9 @@ def fusion_des_tuiles():
     #Fusionner les tuiles de même valeur dans une même direction
     for i in range(Taille_grille):
         for j in range(Taille_grille - 1):
-            if grid[i][j] == grid[i][j+1]:
-                grid[i][j] *= 2
-                grid[i][j+1] = 0
+            if grille[i][j] == grille[i][j+1]:
+                grille[i][j] *= 2
+                grille[i][j+1] = 0
     MAJ_grille
 
 
