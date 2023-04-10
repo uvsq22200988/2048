@@ -33,7 +33,7 @@ grille = [[0 for e in range(Taille_grille)] for e in range(Taille_grille)]
 
 #ajout de nouvelles tuiles
 def ajout_nouvelle_tuille():
-    chiffre_aleatoire = random.randint (0,10)
+    chiffre_aleatoire = rd.randint (0,10)
     #Le chiffre 2 a 90% de chance d'être obtenu alors que le 4 seulement 10% 
     if chiffre_aleatoire <= 9 :
         print(2)
@@ -41,7 +41,7 @@ def ajout_nouvelle_tuille():
         print(4)
     tuille_vide=  [(i, j) for i in range(Taille_grille) for j in range(Taille_grille) if grid[i][j] == 0]
     if tuille_vide:
-        row, col= random.choice(tuille_vide)
+        row, col= rd.choice(tuille_vide)
         grille[row][col]= chiffre_aleatoire
 
 #afficher la mise à jour de la grille
