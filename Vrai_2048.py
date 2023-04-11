@@ -145,4 +145,61 @@ def ajouter_chifre_aleatoire (matrice, positions_des_zeros, print):
     
     # On retourne la matrice modifiée
     return matrice
+
+
+
+
+#NOUVELLE VERSION AVEC UNE GRILLE ET LE BOUTON JOUER 
+import tkinter as tk
+import random
+
+racine = tk.Tk()
+rectangles = []
+grille = [[0] * 4 for i in range(4)]
+score = 0
+
+def update_score():
+    global score
+    score_affichage.config(text=f"Score = {score}")
+
+def start_2048():
+    global rectangles, grille
+    
+    for i in range(4):
+        rectangles_ligne = []
+        for col in range(4):
+            rectangle = tk.Button(racine, text="", width=20, height=10)
+            rectangle.grid(row=i, column=col)
+            rectangles_ligne.append(rectangle)
+        rectangles.append(rectangles_ligne)
+        
+    score_affichage.grid(row=6, column=1, columnspan=2)
+    
+    aléatoire_départ()
+    update_score()
+        
+def aléatoire_départ():
+    global grille, score
+    indices = random.sample(range(16), 2)
+    for i in indices:
+        row = i // 4
+        col = i % 4
+        random_number = debut_chiffre()
+        grille[row][col] = random_number
+        score += random_number
+        rectangles[row][col].config(text=str(grille[row][col]))
+        
+def debut_chiffre():
+    chiffre_aleatoire = random.randint(0, 10)
+    if chiffre_aleatoire <= 9:
+        return 2
+    else:
+        return 4
+    
+score_affichage = tk.Label(racine, text=f"Score = {score}")
+
+button_play = tk.Button(racine, text="Jouer", command=start_2048)
+button_play.grid(row=0, column=0)
+
+racine.mainloop()
  
