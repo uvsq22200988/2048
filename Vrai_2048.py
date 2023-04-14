@@ -150,12 +150,17 @@ def ajouter_chifre_aleatoire (matrice, positions_des_zeros, print):
 
 
 #NOUVELLE VERSION AVEC UNE GRILLE ET LE BOUTON JOUER 
+
+
+#Permet la création de l'interface graphique
 import tkinter as tk
+#Permet de générer des nombres aléatoires
 import random
 
 racine = tk.Tk()
 rectangles = []
 grille = [[0] * 4 for i in range(4)]
+# Variable score initialisée à 0. Score au début du jeux qui va augmenter au fur et à mesure du jeux  
 score = 0
 
 def update_score():
