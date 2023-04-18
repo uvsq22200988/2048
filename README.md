@@ -1,3 +1,4 @@
+
 #2048 EN PYTHON
 
   Le projet consiste à implémenter le jeu 2048 en Python, en utilisant une interface graphique (Tkinter)
