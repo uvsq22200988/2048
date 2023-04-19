@@ -46,7 +46,7 @@ def debut_2048():
     bouton_quitter.grid(row=1, column=7)
     
     aléatoire_départ()
-    update_score()
+    maj_score()
        
 def verifie_gagne_ou_pas():
     global grille 
