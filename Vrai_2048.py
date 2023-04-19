@@ -14,16 +14,21 @@ grille = [[0] * 4 for i in range(4)]
 score = 0
 
 # Création d'une fonction qui met à jour l'affichage du score
-def update_score():
+def maj_score():
     global score
     score_affichage.config(text=f"Score = {score}")
 
-def start_2048():
+# Création d'une fonction qui lance le jeux
+def debut_2048():
     global rectangles, grille
     
+    
+    # La variable 'i' représente l'indice de la ligne variant de 0 à 3
     for i in range(4):
         rectangles_ligne = []
+        # La variable 'col' représente l'indice de la colonne varaint de 0 à 3
         for col in range(4):
+            # Dimensions de l'objet rectangle
             rectangle = tk.Button(racine, text="", width=20, height=10)
             rectangle.grid(row=i, column=col)
             rectangles_ligne.append(rectangle)
