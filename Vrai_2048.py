@@ -26,56 +26,77 @@ def debut_2048():
     # La variable 'i' représente l'indice de la ligne variant de 0 à 3
     for i in range(4):
         rectangles_ligne = []
-        # La variable 'col' représente l'indice de la colonne varaint de 0 à 3
+        # La variable 'col' représente l'indice de la colonne variant de 0 à 3
         for col in range(4):
-            # Dimensions de l'objet rectangle
+            # Dimensions des boutons, ils font tous une largeur de 20 et une hauteur de 10
             rectangle = tk.Button(racine, text="", width=20, height=10, font=("helvatica",17))
+            # Le bouton est ensuite positionné dans la grille en utilisant les coordonnées de la ligne et de la colonne actuelles
             rectangle.grid(row=i, column=col)
+            # Les boutons sont stockés dans la liste appellée 'rectangles'
             rectangles_ligne.append(rectangle)
         rectangles.append(rectangles_ligne)
         
+    #Permet de placer le widget "score_affichage" dans la fenêtre graphique avec les coordonnées renseignés
+    #Columnspan permet d'étendre ce widget sur deux colonnes afin de le centrer dans la fenêtre 
     score_affichage.grid(row=6, column=1, columnspan=2)
     
+    #Création des 4 boutons qui permettent le déplacement des tuiles 
     bouton_left.grid(row=2, column=5)
     bouton_right.grid(row=2, column=7)
     bouton_down.grid(row=2, column=9)
     bouton_up.grid(row=2, column=11)
     
+    #Création du bouton permettant de générer une nouvelle partie du jeux 2048
     button_rejouer = tk.Button(racine, text="Nouvelle partie", command=recommencer_partie)
     button_rejouer.grid(row=1, column=5)
+    #Création du bouton permettant de quitter/finir la partie en cours. Cela affiche un message avec le score de la partie finie 
     bouton_quitter = tk.Button(racine, text="Quitter", command=quitter_partie)
     bouton_quitter.grid(row=1, column=7)
     
     aléatoire_départ()
     maj_score()
-       
+
+    
+#Création d'une fonction qui vérifie si le joueur a reussi à obtenir une tuile avec le nombre 2048 dedans
+#Si c'est le cas, un message disant que le joueur a gagné s'affiche
 def verifie_gagne_ou_pas():
     global grille 
     if 2048 in grille :
         print("Gagné")
-        
+
+#Création d'une fonction permettant de remplir de façon aléatoires deux tuiles de la grille avec 2 chiffres définit avec la fonction debut_chiffre        
 def aléatoire_départ():
     global grille, score
+    #Définir aléatoirement dans la grille 2 tuiles pour y placer les 2 chiffres définit avec la fonction debut_chiffre
     indices = random.sample(range(16), 2)
     for i in indices:
+        #Valeur correspondant à l'indice de la ligne où l'on va placer le prmeier chiffre aléatoire
         row = i // 4
+        #Valeur correspondant à l'indice de la colonne où l'on va placer le second chiffre aléatoire
         col = i % 4
+        #Détermination de nombre aléatoires grâce à la fonction debut_chiffre
         random_number = debut_chiffre()
+        #Permet d'ajouter le nombre aléatoire généré par la fonction debut_chiffre() dans la grille aux indices ci-dessus
         grille[row][col] = random_number
+        #Permet de mettre à jour le score suite à l'ajout du nombre aléatoire dans la grille
         score += random_number
         rectangles[row][col].config(text=str(grille[row][col]))
+
         
+#Création d'une fonction permettant de générer un nombre aléatoire, soit 2 ou 4
+#Sachant que le chiffre 2 a 9 fois plus de chance d'apparaitre que le chiffre 4
 def debut_chiffre():
+    #Générer un chiffre aléatoire entre 0 et 10 inclus 
     chiffre_aleatoire = random.randint(0, 10)
+    #Si le nombre aléatoirement généré est inferieur ou égal à 9, le chiffre 2 est retourné 
     if chiffre_aleatoire <= 9:
         return 2
+    #Dans le cas contraire, c'est le chiffre 4 qui est retourné
     else:
         return 4
     
+#Création d'un widget qui affiche le score en tant réel du joueur    
 score_affichage = tk.Label(racine, text=f"Score = {score}")
-
-button_play = tk.Button(racine, text="Jouer", command=start_2048)
-button_play.grid(row=0, column=0)
 
 
 # Création d'une fonction qui permet de générer une nouvelle partie de jeux 
@@ -95,7 +116,13 @@ def recommencer_partie():
 def quitter_partie():
     global score
     racine.destroy()
+    #Affichage d'une phrase indiquant le score obtenu à la suite de cette partie 
     print(f"La partie est maintenant terminée, votre score est de {score}")        
+    
+    
+#Création du bouton Jouer qui, lorsqu'il est cliqué, exécute la fonction "start_2048"
+button_play = tk.Button(racine, text="Jouer", command=start_2048)
+button_play.grid(row=0, column=0)    
         
 #Ajout des differents boutons dans la fenêtre
 bouton_left = tk.Button(racine, text="Left", command =move_left)
