@@ -40,6 +40,8 @@ def debut_2048():
     bouton_right.grid(row=1, column=7)
     bouton_down.grid(row=1, column=9)
     bouton_up.grid(row=1, column=11)
+    button_rejouer = tk.Button(racine, text="Rejouer", command=recommencer_partie)
+    button_rejouer.grid(row=4, column=4)
 
     aléatoire_départ()
     update_score()
@@ -73,7 +75,20 @@ button_play = tk.Button(racine, text="Jouer", command=start_2048)
 button_play.grid(row=0, column=0)
 
 
-
+# Création d'une fonction qui permet de générer une nouvelle partie de jeux 
+def recommencer_partie():
+    global grille, score
+    # Permet de remettre la grille à zéro
+    grille = [[0] * 4 for i in range(4)]
+    # Permet de réinitialiser le score
+    score = 0
+    # Permet de mettre à jour l'affichage de la grille et du score
+    update_grid()
+    maj_score()
+    # Permet d'ajouter deux chiffres au hasard
+    aléatoire_départ()
+        
+        
 #Ajout des differents boutons dans la fenêtre
 bouton_left = tk.Button(racine, text="Left", command =move_left)
 bouton_right = tk.Button(racine, text="Right", command =move_right)
