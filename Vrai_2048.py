@@ -29,7 +29,7 @@ def debut_2048():
         # La variable 'col' représente l'indice de la colonne varaint de 0 à 3
         for col in range(4):
             # Dimensions de l'objet rectangle
-            rectangle = tk.Button(racine, text="", width=20, height=10)
+            rectangle = tk.Button(racine, text="", width=20, height=10, font=("helvatica",17))
             rectangle.grid(row=i, column=col)
             rectangles_ligne.append(rectangle)
         rectangles.append(rectangles_ligne)
@@ -40,7 +40,8 @@ def debut_2048():
     bouton_right.grid(row=2, column=7)
     bouton_down.grid(row=2, column=9)
     bouton_up.grid(row=2, column=11)
-    button_rejouer = tk.Button(racine, text="Rejouer", command=recommencer_partie)
+    
+    button_rejouer = tk.Button(racine, text="Nouvelle partie", command=recommencer_partie)
     button_rejouer.grid(row=1, column=5)
     bouton_quitter = tk.Button(racine, text="Quitter", command=quitter_partie)
     bouton_quitter.grid(row=1, column=7)
