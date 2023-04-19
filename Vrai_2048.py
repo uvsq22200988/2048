@@ -42,6 +42,8 @@ def debut_2048():
     bouton_up.grid(row=1, column=11)
     button_rejouer = tk.Button(racine, text="Rejouer", command=recommencer_partie)
     button_rejouer.grid(row=4, column=4)
+    bouton_quitter = tk.Button(racine, text="Quitter", command=quitter_partie)
+    bouton_quitter.grid(row=1, column=7)
 
     aléatoire_départ()
     update_score()
@@ -88,6 +90,11 @@ def recommencer_partie():
     # Permet d'ajouter deux chiffres au hasard
     aléatoire_départ()
         
+# Création d'une fonction qui permet de quitter la partie et d'afficher le score obtenu au cours de la partie        
+def quitter_partie():
+    global score
+    racine.destroy()
+    print(f"Partie terminée. Score final: {score}")        
         
 #Ajout des differents boutons dans la fenêtre
 bouton_left = tk.Button(racine, text="Left", command =move_left)
