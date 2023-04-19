@@ -5,12 +5,15 @@ import tkinter as tk
 #Permet de générer des nombres aléatoires
 import random
 
+# Création de la fenêtre du jeux 
 racine = tk.Tk()
 rectangles = []
+# Création d'une matrice 4x4 remplie de zéros
 grille = [[0] * 4 for i in range(4)]
 # Variable score initialisée à 0. Score au début du jeux qui va augmenter au fur et à mesure du jeux  
 score = 0
 
+# Création d'une fonction qui met à jour l'affichage du score
 def update_score():
     global score
     score_affichage.config(text=f"Score = {score}")
