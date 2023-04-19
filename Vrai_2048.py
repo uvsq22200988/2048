@@ -94,7 +94,7 @@ def recommencer_partie():
 def quitter_partie():
     global score
     racine.destroy()
-    print(f"Partie terminée. Score final: {score}")        
+    print(f"La partie est maintenant terminée, le score est de {score}")        
         
 #Ajout des differents boutons dans la fenêtre
 bouton_left = tk.Button(racine, text="Left", command =move_left)
