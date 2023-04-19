@@ -36,15 +36,15 @@ def debut_2048():
         
     score_affichage.grid(row=6, column=1, columnspan=2)
     
-    bouton_left.grid(row=1, column=5)
-    bouton_right.grid(row=1, column=7)
-    bouton_down.grid(row=1, column=9)
-    bouton_up.grid(row=1, column=11)
+    bouton_left.grid(row=2, column=5)
+    bouton_right.grid(row=2, column=7)
+    bouton_down.grid(row=2, column=9)
+    bouton_up.grid(row=2, column=11)
     button_rejouer = tk.Button(racine, text="Rejouer", command=recommencer_partie)
-    button_rejouer.grid(row=4, column=4)
+    button_rejouer.grid(row=1, column=5)
     bouton_quitter = tk.Button(racine, text="Quitter", command=quitter_partie)
     bouton_quitter.grid(row=1, column=7)
-
+    
     aléatoire_départ()
     update_score()
        
