@@ -46,12 +46,23 @@ def debut_2048():
     bouton_down.grid(row=2, column=9)
     bouton_up.grid(row=2, column=11)
     
+    
     #Création du bouton permettant de générer une nouvelle partie du jeux 2048
     button_rejouer = tk.Button(racine, text="Nouvelle partie", command=recommencer_partie)
     button_rejouer.grid(row=1, column=5)
+    
     #Création du bouton permettant de quitter/finir la partie en cours. Cela affiche un message avec le score de la partie finie 
     bouton_quitter = tk.Button(racine, text="Quitter", command=quitter_partie)
     bouton_quitter.grid(row=1, column=7)
+    
+    #Création du bouton permettant de sauvegarder la partie en cours dans un fichier
+    button_sauvegarde = tk.Button(racine, text="Sauvegarder", command=sauvegarder_partie)
+    button_sauvegarde.grid(row=1, column=9)
+    
+    #Création du bouton permettant de continuer une partie qui a été sauvegarder dans un fichier
+    button_continuer = tk.Button(racine, text="Continuer", command=continuer_partie)
+    button_continuer.grid(row=1, column=11)
+    
     
     aléatoire_départ()
     maj_score()
