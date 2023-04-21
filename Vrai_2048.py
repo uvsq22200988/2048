@@ -110,7 +110,7 @@ def debut_chiffre():
 score_affichage = tk.Label(racine, text=f"Score = {score}")
 
 
-# Création d'une fonction qui permet de générer une nouvelle partie de jeux 
+#Création d'une fonction qui permet de générer une nouvelle partie de jeux 
 def recommencer_partie():
     global grille, score
     # Permet de remettre la grille à zéro
@@ -123,14 +123,14 @@ def recommencer_partie():
     # Permet d'ajouter deux chiffres au hasard
     aléatoire_départ()
         
-# Création d'une fonction qui permet de quitter la partie et d'afficher le score obtenu au cours de la partie        
+#Création d'une fonction qui permet de quitter la partie et d'afficher le score obtenu au cours de la partie        
 def quitter_partie():
     global score
     racine.destroy()
     #Affichage d'une phrase indiquant le score obtenu à la suite de cette partie 
     print(f"La partie est maintenant terminée, votre score est de {score}")   
     
-# Création d'une fonction qui permet de sauvegarder la partie en cours dans un fichier 
+#Création d'une fonction qui permet de sauvegarder la partie en cours dans un fichier 
 def sauvegarder_partie():
     global grille
     #Permet de créer un objet fichier nommé fic qui permet d'ouvrir le fichier "fichier.txt" 
@@ -145,6 +145,20 @@ def sauvegarder_partie():
     #Permet de fermer le fichier        
     fic.close()    
     
+    
+#Création d'une fonction qui permet de continuer une partie qui a été sauvegardée à l'aide de la fonction sauvegarder_partie     
+def continuer_partie():
+    global grille
+    #Permet d'ouvre le fichier qui a été sauvegardé 
+    with open("fichier.txt", "r") as f:
+        #Permet de lire les valeurs sauvegardées dans le fichier
+        grille_data = f.read()
+        #Permet de replacer dans la grille de jeu les valeurs du fichier
+        for i in range(4):
+            for j in range(4):
+                grille[i][j] = int(grille_data[i*4+j])
+    update_grid()  
+
     
 #Création du bouton Jouer qui, lorsqu'il est cliqué, exécute la fonction "start_2048"
 button_play = tk.Button(racine, text="Jouer", command=start_2048)
