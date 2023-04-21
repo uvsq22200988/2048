@@ -156,5 +156,6 @@ bouton_right = tk.Button(racine, text="Right", command =move_right)
 bouton_down = tk.Button(racine, text="Down", command =move_down)
 bouton_up = tk.Button(racine, text="Up", command =move_up)
 
+#Permet de lancer la boucle principale d'événements de la fenêtre graphique
 racine.mainloop()
  
