@@ -128,7 +128,22 @@ def quitter_partie():
     global score
     racine.destroy()
     #Affichage d'une phrase indiquant le score obtenu à la suite de cette partie 
-    print(f"La partie est maintenant terminée, votre score est de {score}")        
+    print(f"La partie est maintenant terminée, votre score est de {score}")   
+    
+# Création d'une fonction qui permet de sauvegarder la partie en cours dans un fichier 
+def sauvegarder_partie():
+    global grille
+    #Permet de créer un objet fichier nommé fic qui permet d'ouvrir le fichier "fichier.txt" 
+    fic = open("fichier.txt","w")
+    #La boucle for permet de parcourir chaque élément de la grille
+    #La valeur de chaque élément est écrite dans le fichier de sauvegarde crée 
+    for i in range (4):
+        for col in range(4):
+            #La fonction str est utilisée pour convertir les valeurs en chaînes de caractères
+            #En effet, la méthode write() ne peut écrire que des chaînes de caractères.
+            fic.write(str(grille[i][col]))
+    #Permet de fermer le fichier        
+    fic.close()    
     
     
 #Création du bouton Jouer qui, lorsqu'il est cliqué, exécute la fonction "start_2048"
