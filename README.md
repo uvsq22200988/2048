@@ -21,7 +21,7 @@ Si le joueur ne peut plus effectuer aucun mouvement, la partie est perdue.
 - Le joueur peut quitter la partie en cours en cliquant sur le bouton "Quitter".
 - Le joueur peut faire bouger les tuiles afin de les faire fusionner soit avec les boutons faits à cet effet sur la fenêtre graphique ou bien en utilisant les boutons haut, bas, gauche, droite de son clavier. 
 
-Toutes les lignes de codes sont expliquées plus en détail sur le 
+Toutes les lignes de codes sont expliquées plus en détail sur le fichier python nommé 
 
 
 # Membres 
