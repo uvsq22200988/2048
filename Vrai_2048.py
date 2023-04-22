@@ -4,6 +4,8 @@
 import tkinter as tk
 #Permet de générer des nombres aléatoires
 import random
+#Permet d'importer la classe messagebox du module tkinter
+from tkinter import messagebox
 
 # Création de la fenêtre du jeux 
 racine = tk.Tk()
@@ -67,13 +69,6 @@ def debut_2048():
     aléatoire_départ()
     maj_score()
 
-    
-#Création d'une fonction qui vérifie si le joueur a reussi à obtenir une tuile avec le nombre 2048 dedans
-#Si c'est le cas, un message disant que le joueur a gagné s'affiche
-def verifie_gagne_ou_pas():
-    global grille 
-    if 2048 in grille :
-        print("Gagné")
 
 #Création d'une fonction permettant de remplir de façon aléatoires deux tuiles de la grille avec 2 chiffres définit avec la fonction debut_chiffre        
 def aléatoire_départ():
