@@ -128,7 +128,7 @@ def quitter_partie():
     global score
     racine.destroy()
     #Affichage d'une phrase indiquant le score obtenu à la suite de cette partie 
-    print(f"La partie est maintenant terminée, votre score est de {score}")   
+    print(f"Vous avez quitté la partie, votre score est actuellement de {score}")
     
 #Création d'une fonction qui permet de sauvegarder la partie en cours dans un fichier 
 def sauvegarder_partie():
@@ -142,6 +142,7 @@ def sauvegarder_partie():
             #La fonction str est utilisée pour convertir les valeurs en chaînes de caractères
             #En effet, la méthode write() ne peut écrire que des chaînes de caractères.
             fic.write(str(grille[i][col]))
+            print("La partie a été sauvegardée, vous pouvez la continuer à tout moment")
     #Permet de fermer le fichier        
     fic.close()    
     
