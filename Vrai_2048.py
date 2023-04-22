@@ -155,8 +155,8 @@ def continuer_partie():
         grille_data = f.read()
         #Permet de replacer dans la grille de jeu les valeurs du fichier
         for i in range(4):
-            for j in range(4):
-                grille[i][j] = int(grille_data[i*4+j])
+            for col in range(4):
+                grille[i][col] = int(grille_data[i*4+col])
     update_grid()  
 
     
