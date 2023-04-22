@@ -1,210 +1,176 @@
 #projet 2048
 
-import tkinter as tk
-import random as rd
-
-# Création de la matrice 4x4 vide
-matrice=[[0, 0, 0, 0],
-       [0, 0, 0, 0],
-       [0, 0, 0, 0],
-       [0, 0, 0, 0]]
-
-# Création de la fênetre 
-racine= tk.Tk()
-FONT=('Ubuntu', 75, 'bold')
-canvas= tk.Canvas(racine,background='white',height = 800, width = 800)
-canvas.grid(column=1, row= 1)
-racine.title("2048")
-
-# Création de la fonction permettant de lancer le jeux 
-def start_2048():
-    for i in range(4):
-        for j in range(4):
-            a, b=200*j, 200*i
-            A, B, C=(a, b), (a+200, b+200), (a+100, b+100)
-        canvas.create_rectangle(A, B, fill='darkgrey')
-        canvas.create_text(C, text=matrice[i][j], fill ='white', font=FONT)
-              
-              
-              
-              
-# Création de la grille
-grille = [[0 for e in range(Taille_grille)] for e in range(Taille_grille)]
-
-#ajout de nouvelles tuiles
-def ajout_nouvelle_tuille():
-    chiffre_aleatoire = rd.randint (0,10)
-    #Le chiffre 2 a 90% de chance d'être obtenu alors que le 4 seulement 10% 
-    if chiffre_aleatoire <= 9 :
-        print(2)
-    else : 
-        print(4)
-    tuille_vide=  [(i, j) for i in range(Taille_grille) for j in range(Taille_grille) if grid[i][j] == 0]
-    if tuille_vide:
-        row, col= rd.choice(tuille_vide)
-        grille[row][col]= chiffre_aleatoire
-
-#afficher la mise à jour de la grille
-def MAJ_grille():
-    for i in range(Taille_grille):
-        for j in range(Taille_grille):
-            valeur= grille[i][j]
-            if valeur== 0:
-                 couleur_tuile= ""
-            else:
-                tuile_label= tk.Label(racine, text= str(valeur), font= FONT,bg= "UNE CERTAINE COULEURE")
-                tuile_label.grid(row=i, column=j, padx=5, pady=5)
-
-def fusion_des_tuiles():
-    #Fusionner les tuiles de même valeur dans une même direction
-    for i in range(Taille_grille):
-        for j in range(Taille_grille - 1):
-            if grille[i][j] == grille[i][j+1]:
-                grille[i][j] *= 2
-                grille[i][j+1] = 0
-    MAJ_grille
-
-
-
-
-
-#création du menu comprenant les infos suivantes : score, meilleure score, nouvelle partie
-def menu():
-    score= tk.Menu(canvas, bg= "yellow",fg= "black", font= "300", command= boutton_start)
-    score.grid(column= 1, row= 1, padx= 600)
-
-#création du menu comprenant les infos suivantes : score, meilleure score, nouvelle partie
-
-
-#definir les actions
-actions = ["up", "down","left","right","restart","exit"]
-
-
-#definir le jeu
-def jeu():
-   if actions == "restart":
-       return "Init"
-   if actions == "exit":
-       return " exit"
-       if le joueur a gagné:
-           return "Win"
-       if le joueur a perdu:
-           return "Gameover"
-
-
-#definir les mouvements
-def move(ligne):
-   ###avec la fonction serre on va presser les tuiles
-   def serre(ligne):
-       ###pour les tuiles avec un nombre
-       new_row = [ i for i in ligne if i != 0]
-       ###pour les tuiles sans valeur
-       new_row += [ 0 for i in range(len(ligne) - len(new_row))]
-       return new_row
-   ###avec la fonction fusion on va fusionner les tuiles adjacents ayant les memes nombres
-   def fusion(ligne):
-       pair = False
-       new_row = []
-       for i in range(len(ligne)):
-           if pair:
-               ###ici on definit l'action: 2 tuiles qui fusionnent = multiplie leur valeur par 2
-               new_row.append(2 * ligne[i])
-           else:
-               ###si on fusionne 2 tuiles sur une ligne, alors on doit mettre une tuile vide(0) dans la ligne
-               if i + 1 < len(ligne) and ligne[i] == ligne[i + 1]:
-                   pair = True
-                   new_row.append(0)
-               ###si les 2 tuiles ne peuvent pas fusionner alors on doit ajouter ces elements a la nouvelle liste
-               else:
-                    new_row.append(ligne{i})
-       ###on s'assure ue les fusion ne deforme pas la matrice
-       assert len(new_row) == len(ligne)
-       return new_row
-   racine.mainloop()
-       
-       
-       
-       
-       
-       
-       
-    
-
-# Création d'une liste qui parcourt la matrice permettant de trouver les positions des zéros de cette matrice
-positions_des_zeros = [(i, j) for i, row in enumerate(matrice) for j, element in enumerate(row) if element == 0]
-
-print(positions_des_zeros)
-
-
-def ajouter_chifre_aleatoire (matrice, positions_des_zeros, print):
-    # On choisit une position au hasard dans la liste positions_des_zeros
-    position = random.choice(positions_des_zeros)
-    
-    # On ajoute le chiffre à la position choisie dans la matrice
-    matrice[position[0]][position[1]] = print
-    
-    # On retourne la matrice modifiée
-    return matrice
-
-
-
-
-#NOUVELLE VERSION AVEC UNE GRILLE ET LE BOUTON JOUER 
-
-
 #Permet la création de l'interface graphique
 import tkinter as tk
 #Permet de générer des nombres aléatoires
 import random
 
+# Création de la fenêtre du jeux 
 racine = tk.Tk()
 rectangles = []
+# Création d'une matrice 4x4 remplie de zéros
 grille = [[0] * 4 for i in range(4)]
 # Variable score initialisée à 0. Score au début du jeux qui va augmenter au fur et à mesure du jeux  
 score = 0
 
-def update_score():
+# Création d'une fonction qui met à jour l'affichage du score
+def maj_score():
     global score
     score_affichage.config(text=f"Score = {score}")
 
-def start_2048():
+# Création d'une fonction qui lance le jeux
+def debut_2048():
     global rectangles, grille
     
+    
+    # La variable 'i' représente l'indice de la ligne variant de 0 à 3
     for i in range(4):
         rectangles_ligne = []
+        # La variable 'col' représente l'indice de la colonne variant de 0 à 3
         for col in range(4):
-            rectangle = tk.Button(racine, text="", width=20, height=10)
+            # Dimensions des boutons, ils font tous une largeur de 20 et une hauteur de 10
+            rectangle = tk.Button(racine, text="", width=20, height=10, font=("helvatica",17))
+            # Le bouton est ensuite positionné dans la grille en utilisant les coordonnées de la ligne et de la colonne actuelles
             rectangle.grid(row=i, column=col)
+            # Les boutons sont stockés dans la liste appellée 'rectangles'
             rectangles_ligne.append(rectangle)
         rectangles.append(rectangles_ligne)
         
+    #Permet de placer le widget "score_affichage" dans la fenêtre graphique avec les coordonnées renseignés
+    #Columnspan permet d'étendre ce widget sur deux colonnes afin de le centrer dans la fenêtre 
     score_affichage.grid(row=6, column=1, columnspan=2)
     
+    #Création des 4 boutons qui permettent le déplacement des tuiles 
+    bouton_left.grid(row=2, column=5)
+    bouton_right.grid(row=2, column=7)
+    bouton_down.grid(row=2, column=9)
+    bouton_up.grid(row=2, column=11)
+    
+    
+    #Création du bouton permettant de générer une nouvelle partie du jeux 2048
+    button_rejouer = tk.Button(racine, text="Nouvelle partie", command=recommencer_partie)
+    button_rejouer.grid(row=1, column=5)
+    
+    #Création du bouton permettant de quitter/finir la partie en cours. Cela affiche un message avec le score de la partie finie 
+    bouton_quitter = tk.Button(racine, text="Quitter", command=quitter_partie)
+    bouton_quitter.grid(row=1, column=7)
+    
+    #Création du bouton permettant de sauvegarder la partie en cours dans un fichier
+    button_sauvegarde = tk.Button(racine, text="Sauvegarder", command=sauvegarder_partie)
+    button_sauvegarde.grid(row=1, column=9)
+    
+    #Création du bouton permettant de continuer une partie qui a été sauvegarder dans un fichier
+    button_continuer = tk.Button(racine, text="Continuer", command=continuer_partie)
+    button_continuer.grid(row=1, column=11)
+    
+    
     aléatoire_départ()
-    update_score()
-        
+    maj_score()
+
+    
+#Création d'une fonction qui vérifie si le joueur a reussi à obtenir une tuile avec le nombre 2048 dedans
+#Si c'est le cas, un message disant que le joueur a gagné s'affiche
+def verifie_gagne_ou_pas():
+    global grille 
+    if 2048 in grille :
+        print("Gagné")
+
+#Création d'une fonction permettant de remplir de façon aléatoires deux tuiles de la grille avec 2 chiffres définit avec la fonction debut_chiffre        
 def aléatoire_départ():
     global grille, score
+    #Définir aléatoirement dans la grille 2 tuiles pour y placer les 2 chiffres définit avec la fonction debut_chiffre
     indices = random.sample(range(16), 2)
     for i in indices:
+        #Valeur correspondant à l'indice de la ligne où l'on va placer le prmeier chiffre aléatoire
         row = i // 4
+        #Valeur correspondant à l'indice de la colonne où l'on va placer le second chiffre aléatoire
         col = i % 4
+        #Détermination de nombre aléatoires grâce à la fonction debut_chiffre
         random_number = debut_chiffre()
+        #Permet d'ajouter le nombre aléatoire généré par la fonction debut_chiffre() dans la grille aux indices ci-dessus
         grille[row][col] = random_number
+        #Permet de mettre à jour le score suite à l'ajout du nombre aléatoire dans la grille
         score += random_number
         rectangles[row][col].config(text=str(grille[row][col]))
+
         
+#Création d'une fonction permettant de générer un nombre aléatoire, soit 2 ou 4
+#Sachant que le chiffre 2 a 9 fois plus de chance d'apparaitre que le chiffre 4
 def debut_chiffre():
+    #Générer un chiffre aléatoire entre 0 et 10 inclus 
     chiffre_aleatoire = random.randint(0, 10)
+    #Si le nombre aléatoirement généré est inferieur ou égal à 9, le chiffre 2 est retourné 
     if chiffre_aleatoire <= 9:
         return 2
+    #Dans le cas contraire, c'est le chiffre 4 qui est retourné
     else:
         return 4
     
+#Création d'un widget qui affiche le score en tant réel du joueur    
 score_affichage = tk.Label(racine, text=f"Score = {score}")
 
-button_play = tk.Button(racine, text="Jouer", command=start_2048)
-button_play.grid(row=0, column=0)
 
+#Création d'une fonction qui permet de générer une nouvelle partie de jeux 
+def recommencer_partie():
+    global grille, score
+    # Permet de remettre la grille à zéro
+    grille = [[0] * 4 for i in range(4)]
+    # Permet de réinitialiser le score
+    score = 0
+    # Permet de mettre à jour l'affichage de la grille et du score
+    update_grid()
+    maj_score()
+    # Permet d'ajouter deux chiffres au hasard
+    aléatoire_départ()
+        
+#Création d'une fonction qui permet de quitter la partie et d'afficher le score obtenu au cours de la partie        
+def quitter_partie():
+    global score
+    racine.destroy()
+    #Affichage d'une phrase indiquant le score obtenu à la suite de cette partie 
+    print(f"Vous avez quitté la partie, votre score est actuellement de {score}")
+    
+#Création d'une fonction qui permet de sauvegarder la partie en cours dans un fichier 
+def sauvegarder_partie():
+    global grille
+    #Permet de créer un objet fichier nommé fic qui permet d'ouvrir le fichier "fichier.txt" 
+    fic = open("fichier.txt","w")
+    #La boucle for permet de parcourir chaque élément de la grille
+    #La valeur de chaque élément est écrite dans le fichier de sauvegarde crée 
+    for i in range (4):
+        for col in range(4):
+            #La fonction str est utilisée pour convertir les valeurs en chaînes de caractères
+            #En effet, la méthode write() ne peut écrire que des chaînes de caractères.
+            fic.write(str(grille[i][col]))
+            print("La partie a été sauvegardée, vous pouvez la continuer à tout moment")
+    #Permet de fermer le fichier        
+    fic.close()    
+    
+    
+#Création d'une fonction qui permet de continuer une partie qui a été sauvegardée à l'aide de la fonction sauvegarder_partie     
+def continuer_partie():
+    global grille
+    #Permet d'ouvre le fichier qui a été sauvegardé 
+    with open("fichier.txt", "r") as f:
+        #Permet de lire les valeurs sauvegardées dans le fichier
+        grille_data = f.read()
+        #Permet de replacer dans la grille de jeu les valeurs du fichier
+        for i in range(4):
+            for col in range(4):
+                grille[i][col] = int(grille_data[i*4+col])
+    update_grid()  
+
+    
+#Création du bouton Jouer qui, lorsqu'il est cliqué, exécute la fonction "start_2048"
+button_play = tk.Button(racine, text="Jouer", command=start_2048)
+button_play.grid(row=0, column=0)    
+        
+#Ajout des differents boutons dans la fenêtre
+bouton_left = tk.Button(racine, text="Left", command =move_left)
+bouton_right = tk.Button(racine, text="Right", command =move_right)
+bouton_down = tk.Button(racine, text="Down", command =move_down)
+bouton_up = tk.Button(racine, text="Up", command =move_up)
+
+#Permet de lancer la boucle principale d'événements de la fenêtre graphique
 racine.mainloop()
  
