@@ -126,6 +126,7 @@ def recommencer_partie():
 #Création d'une fonction qui permet de quitter la partie et d'afficher le score obtenu au cours de la partie        
 def quitter_partie():
     global score
+    #Permet de fermer la fenêtre du jeu
     racine.destroy()
     #Affichage d'une phrase indiquant le score obtenu à la suite de cette partie 
     print(f"Vous avez quitté la partie, votre score est actuellement de {score}")
