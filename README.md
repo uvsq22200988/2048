@@ -5,10 +5,23 @@
 
 #REGLE DU JEU
  
- Il s'agit d'un jeu en solo. Le joueur doit déplacer des tuiles dans plusieurs directions: de haut en bas et de droite à gauche pour "fusionner" les tuiles de même valeurs. Les tuiles départ sont 2 ou 4. Pour gagner le joueur doit obtenir une tuile ayant comme valeur le nombre 2048. Toutefois si le joueur ne peut plus effectuer aucun mouvement, la partie est terminée (La partie affiche alors GAME OVER).
+Le but du jeu 2048 est de fusionner des tuiles numérotées pour atteindre la tuile numérotée 2048. 
+Au début de chaque partie, deux tuiles numérotées sont placées de manière aléatoire sur une grille de jeu 4x4. 
+Le joueur peut déplacer les tuiles dans les quatre directions (haut, bas, gauche, droite) en utilisant les boutons correspondants.
+Lorsque deux tuiles numérotées identiques se touchent, elles fusionnent pour former une tuile dont le nombre est égal à la somme des nombres des deux tuiles initiales.
+Si le joueur ne peut plus effectuer aucun mouvement, la partie est perdue.
 
 
+#FONCTIONNALITEES RETROUVEES DANS CE JEU
 
+- Le score est affiché en temps réel et mis à jour à chaque fusion de tuiles.
+- Le joueur peut recommencer une partie en cliquant sur le bouton "Nouvelle partie".
+- Le joueur peut sauvegarder la partie en cours en cliquant sur le bouton "Sauvegarder".
+- Le joueur peut continuer une partie sauvegardée en cliquant sur le bouton "Continuer".
+- Le joueur peut quitter la partie en cours en cliquant sur le bouton "Quitter".
+- Le joueur peut faire bouger les tuiles afin de les faire fusionner soit avec les boutons faits à cet effet sur la fenêtre graphique ou bien en utilisant les boutons haut, bas, gauche, droite de son clavier. 
+
+Toutes les lignes de codes sont expliquées plus en détail sur le 
 
 
 # Membres 
