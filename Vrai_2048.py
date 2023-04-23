@@ -262,7 +262,12 @@ def move_right():
 
 
 
-
+#Création d'une fonction qui vérifie si le joueur a reussi à obtenir une tuile avec le nombre 2048 dedans
+#Si c'est le cas, un message disant que le joueur a gagné s'affiche
+def verifie_gagne_ou_pas():
+    global grille 
+    if 2048 in grille :
+        print("Gagné")
 
 
 
