@@ -161,11 +161,6 @@ def continuer_partie():
 button_play = tk.Button(racine, text="Jouer", command=start_2048)
 button_play.grid(row=0, column=0)    
         
-#Ajout des differents boutons dans la fenêtre
-bouton_left = tk.Button(racine, text="Left", command =move_left)
-bouton_right = tk.Button(racine, text="Right", command =move_right)
-bouton_down = tk.Button(racine, text="Down", command =move_down)
-bouton_up = tk.Button(racine, text="Up", command =move_up)
 
 #Permet de lancer la boucle principale d'événements de la fenêtre graphique
 racine.mainloop()
