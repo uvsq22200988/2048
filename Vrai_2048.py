@@ -15,6 +15,7 @@ grille = [[0] * 4 for i in range(4)]
 # Variable score initialisée à 0. Score au début du jeux qui va augmenter au fur et à mesure du jeux  
 score = 0
 
+
 # Création d'une fonction qui met à jour l'affichage du score
 def maj_score():
     global score
@@ -23,8 +24,6 @@ def maj_score():
 # Création d'une fonction qui lance le jeux
 def debut_2048():
     global rectangles, grille
-    
-    
     # La variable 'i' représente l'indice de la ligne variant de 0 à 3
     for i in range(4):
         rectangles_ligne = []
@@ -48,7 +47,6 @@ def debut_2048():
     bouton_down.grid(row=2, column=9)
     bouton_up.grid(row=2, column=11)
     
-    
     #Création du bouton permettant de générer une nouvelle partie du jeux 2048
     button_rejouer = tk.Button(racine, text="Nouvelle partie", command=recommencer_partie)
     button_rejouer.grid(row=1, column=5)
@@ -65,11 +63,10 @@ def debut_2048():
     button_continuer = tk.Button(racine, text="Continuer", command=continuer_partie)
     button_continuer.grid(row=1, column=11)
     
-    
     aléatoire_départ()
     maj_score()
 
-
+        
 #Création d'une fonction permettant de remplir de façon aléatoires deux tuiles de la grille avec 2 chiffres définit avec la fonction debut_chiffre        
 def aléatoire_départ():
     global grille, score
@@ -100,9 +97,104 @@ def debut_chiffre():
     #Dans le cas contraire, c'est le chiffre 4 qui est retourné
     else:
         return 4
-    
 #Création d'un widget qui affiche le score en tant réel du joueur    
 score_affichage = tk.Label(racine, text=f"Score = {score}")
+
+#Création d'une fonction qui permet de faire bouger les tuiles vers le haut
+def move_up():
+    global grille, score
+    moved = False
+    #Parcourt chaque colonne de la grille
+    for col in range(4):
+        #Pour chaque colonne, parcourt aussi chaque ligne de la deuxième à la dernière
+        for row in range(1, 4):
+            if grille[row][col] != 0:
+                r = row
+                while r > 0 and grille[r-1][col] == 0:
+                    grille[r-1][col] = grille[r][col]
+                    grille[r][col] = 0
+                    r -= 1
+                    moved = True
+                if r > 0 and grille[r-1][col] == grille[r][col]:
+                    grille[r-1][col] *= 2
+                    score += grille[r-1][col]
+                    grille[r][col] = 0
+                    moved = True
+    #Si au moins une case a fusionné, les fonctions suivantes sont appellées                
+    if moved:
+        aléatoire_chiffre()
+        maj_score()
+        update_grid()
+        verifier_fin_de_jeu_ou_pas(grille)
+        verifie_gagne_ou_pas()
+
+def aléatoire_chiffre():
+    global grille
+    #Permet de trouver tous les emplacements vides dans la grille, c'est-à-dire les tuiles où il y a un 0
+    empty_cells = []
+    for row in range(4):
+        for col in range(4):
+            if grille[row][col] == 0:
+                empty_cells.append((row, col))
+    if empty_cells:
+        #Permet de choisir un emplacement vide aléatoire et mettre un chiffre 2 ou 4
+        row, col = random.choice(empty_cells)
+        grille[row][col] = debut_chiffre()
+
+                
+                
+def update_grid():
+    #Permet de mettre à jour l'affichage de la grille avec les nouvelles valeurs de la grille
+    for i in range(4):
+        for col in range(4):
+            if grille[i][col] == 0:
+                rectangles[i][col].config(text="")
+                rectangles[i][col].config(bg="grey")
+            else:
+                rectangles[i][col].config(text=str(grille[i][col]))
+                if grille[i][col] == 2:
+                    rectangles[i][col].config(bg="bisque")
+                elif grille[i][col] == 4:
+                    rectangles[i][col].config(bg="wheat")
+                elif grille[i][col] == 8:
+                    rectangles[i][col].config(bg="sandybrown")
+                elif grille[i][col] == 16:
+                    rectangles[i][col].config(bg="salmon")
+                elif grille[i][col] == 32:
+                    rectangles[i][col].config(bg="coral")
+                elif grille[i][col] == 64:
+                    rectangles[i][col].config(bg="orangered")
+                elif grille[i][col] == 128:
+                    rectangles[i][col].config(bg="gold")
+                elif grille[i][col] == 256:
+                    rectangles[i][col].config(bg="yellow")
+                elif grille[i][col] == 512:
+                    rectangles[i][col].config(bg="khaki")
+                elif grille[i][col] == 1024:
+                    rectangles[i][col].config(bg="yellow")
+                elif grille[i][col] == 2048:
+                    rectangles[i][col].config(bg="gold")
+                else:
+                    rectangles[i][col].config(bg="white")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #Création d'une fonction qui permet de générer une nouvelle partie de jeux 
@@ -140,8 +232,7 @@ def sauvegarder_partie():
             fic.write(str(grille[i][col]))
             print("La partie a été sauvegardée, vous pouvez la continuer à tout moment")
     #Permet de fermer le fichier        
-    fic.close()    
-    
+    fic.close()
     
 #Création d'une fonction qui permet de continuer une partie qui a été sauvegardée à l'aide de la fonction sauvegarder_partie     
 def continuer_partie():
@@ -155,13 +246,22 @@ def continuer_partie():
             for col in range(4):
                 grille[i][col] = int(grille_data[i*4+col])
     update_grid()  
-
     
-#Création du bouton Jouer qui, lorsqu'il est cliqué, exécute la fonction "start_2048"
-button_play = tk.Button(racine, text="Jouer", command=start_2048)
+    
+#Création du bouton Jouer qui, lorsqu'il est cliqué, exécute la fonction "debut_2048"
+button_play = tk.Button(racine, text="Jouer", fg = 'white', bg = 'orange', font=200, command=debut_2048)
 button_play.grid(row=0, column=0)    
-        
+
+
+#Ajout des differents boutons dans la fenêtre
+bouton_left = tk.Button(racine, text="Left", command =move_left)
+bouton_right = tk.Button(racine, text="Right", command =move_right)
+bouton_down = tk.Button(racine, text="Down", command =move_down)
+bouton_up = tk.Button(racine, text="Up", command =move_up)
 
 #Permet de lancer la boucle principale d'événements de la fenêtre graphique
+racine.bind('<Up>', lambda event: move_up())
+racine.bind('<Down>', lambda event: move_down())
+racine.bind('<Left>', lambda event: move_left())
+racine.bind('<Right>', lambda event: move_right())
 racine.mainloop()
- 
