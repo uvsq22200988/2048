@@ -24,8 +24,6 @@ def maj_score():
 # Création d'une fonction qui lance le jeux
 def debut_2048():
     global rectangles, grille
-    
-    
     # La variable 'i' représente l'indice de la ligne variant de 0 à 3
     for i in range(4):
         rectangles_ligne = []
@@ -49,7 +47,6 @@ def debut_2048():
     bouton_down.grid(row=2, column=9)
     bouton_up.grid(row=2, column=11)
     
-    
     #Création du bouton permettant de générer une nouvelle partie du jeux 2048
     button_rejouer = tk.Button(racine, text="Nouvelle partie", command=recommencer_partie)
     button_rejouer.grid(row=1, column=5)
@@ -66,17 +63,8 @@ def debut_2048():
     button_continuer = tk.Button(racine, text="Continuer", command=continuer_partie)
     button_continuer.grid(row=1, column=11)
     
-    
     aléatoire_départ()
     maj_score()
-
-    
-    # Création d'une fonction qui vérifie si le joueur a reussi à obtenir une tuile avec le nombre 2048 dedans
-    # Si c'est le cas, un message disant que le joueur a gagné s'affiche
-def verifie_gagne_ou_pas():
-    global grille
-    if 2048 in grille:
-        print("Gagné")
 
         
 #Création d'une fonction permettant de remplir de façon aléatoires deux tuiles de la grille avec 2 chiffres définit avec la fonction debut_chiffre        
@@ -111,124 +99,6 @@ def debut_chiffre():
         return 4
 #Création d'un widget qui affiche le score en tant réel du joueur    
 score_affichage = tk.Label(racine, text=f"Score = {score}")
-
-
-def move_up():
-    global grille, score
-    moved = False
-    for col in range(4):
-        for row in range(1, 4):
-            if grille[row][col] != 0:
-                r = row
-                while r > 0 and grille[r-1][col] == 0:
-                    grille[r-1][col] = grille[r][col]
-                    grille[r][col] = 0
-                    r -= 1
-                    moved = True
-                if r > 0 and grille[r-1][col] == grille[r][col]:
-                    grille[r-1][col] *= 2
-                    score += grille[r-1][col]
-                    grille[r][col] = 0
-                    moved = True
-    if moved:
-        aléatoire_chiffre()
-        maj_score()
-        update_grid()
-        
-        
-def aléatoire_chiffre():
-    global grille
-    # trouver tous les emplacements vides dans la grille
-    empty_cells = []
-    for row in range(4):
-        for col in range(4):
-            if grille[row][col] == 0:
-                empty_cells.append((row, col))
-    if empty_cells:
-        # choisir un emplacement vide aléatoire et mettre un chiffre 2 ou 4
-        row, col = random.choice(empty_cells)
-        grille[row][col] = debut_chiffre()
-        
-def update_grid():
-    # mettre à jour l'affichage de la grille avec les valeurs de la grille
-    for row in range(4):
-        for col in range(4):
-            if grille[row][col] == 0:
-                rectangles[row][col].config(text="")
-            else:
-                rectangles[row][col].config(
-                    text=str(grille[row][col]), fg=couleur_tuile[grille[row][col]])
-            color = couleur_tuile[grille[row][col]]
-
-            
-            
-def move_down():
-    global grille, score
-    moved = False
-    for col in range(4):
-        for row in range(2, -1, -1):
-            if grille[row][col] != 0:
-                r = row
-                while r < 3 and grille[r+1][col] == 0:
-                    grille[r+1][col] = grille[r][col]
-                    grille[r][col] = 0
-                    r += 1
-                    moved = True
-                if r < 3 and grille[r+1][col] == grille[r][col]:
-                    grille[r+1][col] *= 2
-                    score += grille[r+1][col]
-                    grille[r][col] = 0
-                    moved = True
-    if moved:
-        aléatoire_chiffre()
-        maj_score()
-        update_grid()
-
-        
-def move_left():
-    global grille, score
-    moved = False
-    for row in range(4):
-        for col in range(1, 4):
-            if grille[row][col] != 0:
-                c = col
-                while c > 0 and grille[row][c-1] == 0:
-                    grille[row][c-1] = grille[row][c]
-                    grille[row][c] = 0
-                    c -= 1
-                    moved = True
-                if c > 0 and grille[row][c-1] == grille[row][c]:
-                    grille[row][c-1] *= 2
-                    score += grille[row][c-1]
-                    grille[row][c] = 0
-                    moved = True
-    if moved:
-        aléatoire_chiffre()
-        maj_score()
-        update_grid()
-
-
-def move_right():
-    global grille, score
-    moved = False
-    for row in range(4):
-        for col in range(2, -1, -1):
-            if grille[row][col] != 0:
-                c = col
-                while c < 3 and grille[row][c+1] == 0:
-                    grille[row][c+1] = grille[row][c]
-                    grille[row][c] = 0
-                    c += 1
-                    moved = True
-                if c < 3 and grille[row][c+1] == grille[row][c]:
-                    grille[row][c+1] *= 2
-                    score += grille[row][c+1]
-                    grille[row][c] = 0
-                    moved = True
-    if moved:
-        aléatoire_chiffre()
-        maj_score()
-        update_grid()
 
 
 
@@ -267,8 +137,7 @@ def sauvegarder_partie():
             fic.write(str(grille[i][col]))
             print("La partie a été sauvegardée, vous pouvez la continuer à tout moment")
     #Permet de fermer le fichier        
-    fic.close()    
-    
+    fic.close()
     
 #Création d'une fonction qui permet de continuer une partie qui a été sauvegardée à l'aide de la fonction sauvegarder_partie     
 def continuer_partie():
@@ -282,10 +151,10 @@ def continuer_partie():
             for col in range(4):
                 grille[i][col] = int(grille_data[i*4+col])
     update_grid()  
-
     
-#Création du bouton Jouer qui, lorsqu'il est cliqué, exécute la fonction "start_2048"
-button_play = tk.Button(racine, text="Jouer", command=start_2048)
+    
+#Création du bouton Jouer qui, lorsqu'il est cliqué, exécute la fonction "debut_2048"
+button_play = tk.Button(racine, text="Jouer", command=debut_2048)
 button_play.grid(row=0, column=0)    
 
 
@@ -301,6 +170,3 @@ racine.bind('<Down>', lambda event: move_down())
 racine.bind('<Left>', lambda event: move_left())
 racine.bind('<Right>', lambda event: move_right())
 racine.mainloop()
-
-
- 
