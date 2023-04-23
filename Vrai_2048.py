@@ -15,11 +15,6 @@ grille = [[0] * 4 for i in range(4)]
 # Variable score initialisée à 0. Score au début du jeux qui va augmenter au fur et à mesure du jeux  
 score = 0
 
-    #Création du dictionnaire et de la variable permeettant d'associer à chaque valeur une couleur propre
-couleur_tuile = {0: "bisque", 2: "yellow", 4: "orange", 8: "red", 16: "purple", 32: "F67C5F",
-                 64: "F65E3B", 128: "EDCF72", 256: "EDCC61", 512: "EDC850", 1024: "EDC53F", 2048: "EDC22E"}
-
-color = couleur_tuile[0]
 
 # Création d'une fonction qui met à jour l'affichage du score
 def maj_score():
@@ -292,6 +287,13 @@ def continuer_partie():
 #Création du bouton Jouer qui, lorsqu'il est cliqué, exécute la fonction "start_2048"
 button_play = tk.Button(racine, text="Jouer", command=start_2048)
 button_play.grid(row=0, column=0)    
+
+
+#Ajout des differents boutons dans la fenêtre
+bouton_left = tk.Button(racine, text="Left", command =move_left)
+bouton_right = tk.Button(racine, text="Right", command =move_right)
+bouton_down = tk.Button(racine, text="Down", command =move_down)
+bouton_up = tk.Button(racine, text="Up", command =move_up)
 
 #Permet de lancer la boucle principale d'événements de la fenêtre graphique
 racine.bind('<Up>', lambda event: move_up())
