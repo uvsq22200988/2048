@@ -100,7 +100,82 @@ def debut_chiffre():
 #Création d'un widget qui affiche le score en tant réel du joueur    
 score_affichage = tk.Label(racine, text=f"Score = {score}")
 
+#Création d'une fonction qui permet de faire bouger les tuiles vers le haut
+def move_up():
+    global grille, score
+    moved = False
+    #Parcourt chaque colonne de la grille
+    for col in range(4):
+        #Pour chaque colonne, parcourt aussi chaque ligne de la deuxième à la dernière
+        for row in range(1, 4):
+            if grille[row][col] != 0:
+                r = row
+                while r > 0 and grille[r-1][col] == 0:
+                    grille[r-1][col] = grille[r][col]
+                    grille[r][col] = 0
+                    r -= 1
+                    moved = True
+                if r > 0 and grille[r-1][col] == grille[r][col]:
+                    grille[r-1][col] *= 2
+                    score += grille[r-1][col]
+                    grille[r][col] = 0
+                    moved = True
+    #Si au moins une case a fusionné, les fonctions suivantes sont appellées                
+    if moved:
+        aléatoire_chiffre()
+        maj_score()
+        update_grid()
+        verifier_fin_de_jeu_ou_pas(grille)
+        verifie_gagne_ou_pas()
 
+def aléatoire_chiffre():
+    global grille
+    #Permet de trouver tous les emplacements vides dans la grille, c'est-à-dire les tuiles où il y a un 0
+    empty_cells = []
+    for row in range(4):
+        for col in range(4):
+            if grille[row][col] == 0:
+                empty_cells.append((row, col))
+    if empty_cells:
+        #Permet de choisir un emplacement vide aléatoire et mettre un chiffre 2 ou 4
+        row, col = random.choice(empty_cells)
+        grille[row][col] = debut_chiffre()
+
+                
+                
+def update_grid():
+    #Permet de mettre à jour l'affichage de la grille avec les nouvelles valeurs de la grille
+    for i in range(4):
+        for col in range(4):
+            if grille[i][col] == 0:
+                rectangles[i][col].config(text="")
+                rectangles[i][col].config(bg="grey")
+            else:
+                rectangles[i][col].config(text=str(grille[i][col]))
+                if grille[i][col] == 2:
+                    rectangles[i][col].config(bg="bisque")
+                elif grille[i][col] == 4:
+                    rectangles[i][col].config(bg="wheat")
+                elif grille[i][col] == 8:
+                    rectangles[i][col].config(bg="sandybrown")
+                elif grille[i][col] == 16:
+                    rectangles[i][col].config(bg="salmon")
+                elif grille[i][col] == 32:
+                    rectangles[i][col].config(bg="coral")
+                elif grille[i][col] == 64:
+                    rectangles[i][col].config(bg="orangered")
+                elif grille[i][col] == 128:
+                    rectangles[i][col].config(bg="gold")
+                elif grille[i][col] == 256:
+                    rectangles[i][col].config(bg="yellow")
+                elif grille[i][col] == 512:
+                    rectangles[i][col].config(bg="khaki")
+                elif grille[i][col] == 1024:
+                    rectangles[i][col].config(bg="yellow")
+                elif grille[i][col] == 2048:
+                    rectangles[i][col].config(bg="gold")
+                else:
+                    rectangles[i][col].config(bg="white")
 
 
 
