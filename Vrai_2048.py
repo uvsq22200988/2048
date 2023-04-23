@@ -232,7 +232,30 @@ def move_left():
 
 
 
-
+#Création d'une fonction qui permet de faire bouger les tuiles vers la droite
+def move_right():
+    global grille, score
+    moved = False
+    for row in range(4):
+        for col in range(2, -1, -1):
+            if grille[row][col] != 0:
+                c = col
+                while c < 3 and grille[row][c+1] == 0:
+                    grille[row][c+1] = grille[row][c]
+                    grille[row][c] = 0
+                    c += 1
+                    moved = True
+                if c < 3 and grille[row][c+1] == grille[row][c]:
+                    grille[row][c+1] *= 2
+                    score += grille[row][c+1]
+                    grille[row][c] = 0
+                    moved = True
+    if moved:
+        aléatoire_chiffre()
+        maj_score()
+        update_grid()
+        verifier_fin_de_jeu_ou_pas(grille)
+        verifie_gagne_ou_pas()
 
 
 
