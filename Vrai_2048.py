@@ -15,6 +15,12 @@ grille = [[0] * 4 for i in range(4)]
 # Variable score initialisée à 0. Score au début du jeux qui va augmenter au fur et à mesure du jeux  
 score = 0
 
+    #Création du dictionnaire et de la variable permeettant d'associer à chaque valeur une couleur propre
+couleur_tuile = {0: "bisque", 2: "yellow", 4: "orange", 8: "red", 16: "purple", 32: "F67C5F",
+                 64: "F65E3B", 128: "EDCF72", 256: "EDCC61", 512: "EDC850", 1024: "EDC53F", 2048: "EDC22E"}
+
+color = couleur_tuile[0]
+
 # Création d'une fonction qui met à jour l'affichage du score
 def maj_score():
     global score
@@ -69,7 +75,15 @@ def debut_2048():
     aléatoire_départ()
     maj_score()
 
+    
+    # Création d'une fonction qui vérifie si le joueur a reussi à obtenir une tuile avec le nombre 2048 dedans
+    # Si c'est le cas, un message disant que le joueur a gagné s'affiche
+def verifie_gagne_ou_pas():
+    global grille
+    if 2048 in grille:
+        print("Gagné")
 
+        
 #Création d'une fonction permettant de remplir de façon aléatoires deux tuiles de la grille avec 2 chiffres définit avec la fonction debut_chiffre        
 def aléatoire_départ():
     global grille, score
@@ -100,9 +114,127 @@ def debut_chiffre():
     #Dans le cas contraire, c'est le chiffre 4 qui est retourné
     else:
         return 4
-    
 #Création d'un widget qui affiche le score en tant réel du joueur    
 score_affichage = tk.Label(racine, text=f"Score = {score}")
+
+
+def move_up():
+    global grille, score
+    moved = False
+    for col in range(4):
+        for row in range(1, 4):
+            if grille[row][col] != 0:
+                r = row
+                while r > 0 and grille[r-1][col] == 0:
+                    grille[r-1][col] = grille[r][col]
+                    grille[r][col] = 0
+                    r -= 1
+                    moved = True
+                if r > 0 and grille[r-1][col] == grille[r][col]:
+                    grille[r-1][col] *= 2
+                    score += grille[r-1][col]
+                    grille[r][col] = 0
+                    moved = True
+    if moved:
+        aléatoire_chiffre()
+        maj_score()
+        update_grid()
+        
+        
+def aléatoire_chiffre():
+    global grille
+    # trouver tous les emplacements vides dans la grille
+    empty_cells = []
+    for row in range(4):
+        for col in range(4):
+            if grille[row][col] == 0:
+                empty_cells.append((row, col))
+    if empty_cells:
+        # choisir un emplacement vide aléatoire et mettre un chiffre 2 ou 4
+        row, col = random.choice(empty_cells)
+        grille[row][col] = debut_chiffre()
+        
+def update_grid():
+    # mettre à jour l'affichage de la grille avec les valeurs de la grille
+    for row in range(4):
+        for col in range(4):
+            if grille[row][col] == 0:
+                rectangles[row][col].config(text="")
+            else:
+                rectangles[row][col].config(
+                    text=str(grille[row][col]), fg=couleur_tuile[grille[row][col]])
+            color = couleur_tuile[grille[row][col]]
+
+            
+            
+def move_down():
+    global grille, score
+    moved = False
+    for col in range(4):
+        for row in range(2, -1, -1):
+            if grille[row][col] != 0:
+                r = row
+                while r < 3 and grille[r+1][col] == 0:
+                    grille[r+1][col] = grille[r][col]
+                    grille[r][col] = 0
+                    r += 1
+                    moved = True
+                if r < 3 and grille[r+1][col] == grille[r][col]:
+                    grille[r+1][col] *= 2
+                    score += grille[r+1][col]
+                    grille[r][col] = 0
+                    moved = True
+    if moved:
+        aléatoire_chiffre()
+        maj_score()
+        update_grid()
+
+        
+def move_left():
+    global grille, score
+    moved = False
+    for row in range(4):
+        for col in range(1, 4):
+            if grille[row][col] != 0:
+                c = col
+                while c > 0 and grille[row][c-1] == 0:
+                    grille[row][c-1] = grille[row][c]
+                    grille[row][c] = 0
+                    c -= 1
+                    moved = True
+                if c > 0 and grille[row][c-1] == grille[row][c]:
+                    grille[row][c-1] *= 2
+                    score += grille[row][c-1]
+                    grille[row][c] = 0
+                    moved = True
+    if moved:
+        aléatoire_chiffre()
+        maj_score()
+        update_grid()
+
+
+def move_right():
+    global grille, score
+    moved = False
+    for row in range(4):
+        for col in range(2, -1, -1):
+            if grille[row][col] != 0:
+                c = col
+                while c < 3 and grille[row][c+1] == 0:
+                    grille[row][c+1] = grille[row][c]
+                    grille[row][c] = 0
+                    c += 1
+                    moved = True
+                if c < 3 and grille[row][c+1] == grille[row][c]:
+                    grille[row][c+1] *= 2
+                    score += grille[row][c+1]
+                    grille[row][c] = 0
+                    moved = True
+    if moved:
+        aléatoire_chiffre()
+        maj_score()
+        update_grid()
+
 
 
 #Création d'une fonction qui permet de générer une nouvelle partie de jeux 
@@ -160,8 +292,13 @@ def continuer_partie():
 #Création du bouton Jouer qui, lorsqu'il est cliqué, exécute la fonction "start_2048"
 button_play = tk.Button(racine, text="Jouer", command=start_2048)
 button_play.grid(row=0, column=0)    
-        
 
 #Permet de lancer la boucle principale d'événements de la fenêtre graphique
+racine.bind('<Up>', lambda event: move_up())
+racine.bind('<Down>', lambda event: move_down())
+racine.bind('<Left>', lambda event: move_left())
+racine.bind('<Right>', lambda event: move_right())
 racine.mainloop()
+
+
  
