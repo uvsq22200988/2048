@@ -102,6 +102,26 @@ score_affichage = tk.Label(racine, text=f"Score = {score}")
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Création d'une fonction qui permet de générer une nouvelle partie de jeux 
 def recommencer_partie():
     global grille, score
@@ -154,7 +174,7 @@ def continuer_partie():
     
     
 #Création du bouton Jouer qui, lorsqu'il est cliqué, exécute la fonction "debut_2048"
-button_play = tk.Button(racine, text="Jouer", command=debut_2048)
+button_play = tk.Button(racine, text="Jouer", fg = 'white', bg = 'orange', font=200, command=debut_2048)
 button_play.grid(row=0, column=0)    
 
 
