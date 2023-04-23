@@ -176,6 +176,57 @@ def update_grid():
                     rectangles[i][col].config(bg="gold")
                 else:
                     rectangles[i][col].config(bg="white")
+                    
+#Création d'une fonction qui permet de faire bouger les tuiles vers le bas       
+def move_down():
+    global grille, score
+    moved = False
+    for col in range(4):
+        for row in range(2, -1, -1):
+            if grille[row][col] != 0:
+                r = row
+                while r < 3 and grille[r+1][col] == 0:
+                    grille[r+1][col] = grille[r][col]
+                    grille[r][col] = 0
+                    r += 1
+                    moved = True
+                if r < 3 and grille[r+1][col] == grille[r][col]:
+                    grille[r+1][col] *= 2
+                    score += grille[r+1][col]
+                    grille[r][col] = 0
+                    moved = True
+    if moved:
+        aléatoire_chiffre()
+        maj_score()
+        update_grid()
+        verifier_fin_de_jeu_ou_pas(grille)
+        verifie_gagne_ou_pas()
+
+            
+#Création d'une fonction qui permet de faire bouger les tuiles vers la gauche         
+def move_left():
+    global grille, score
+    moved = False
+    for row in range(4):
+        for col in range(1, 4):
+            if grille[row][col] != 0:
+                c = col
+                while c > 0 and grille[row][c-1] == 0:
+                    grille[row][c-1] = grille[row][c]
+                    grille[row][c] = 0
+                    c -= 1
+                    moved = True
+                if c > 0 and grille[row][c-1] == grille[row][c]:
+                    grille[row][c-1] *= 2
+                    score += grille[row][c-1]
+                    grille[row][c] = 0
+                    moved = True
+    if moved:
+        aléatoire_chiffre()
+        maj_score()
+        update_grid()
+        verifier_fin_de_jeu_ou_pas(grille)
+        verifie_gagne_ou_pas()
 
 
 
