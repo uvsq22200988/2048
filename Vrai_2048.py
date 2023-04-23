@@ -140,9 +140,7 @@ def aléatoire_chiffre():
         #Permet de choisir un emplacement vide aléatoire et mettre un chiffre 2 ou 4
         row, col = random.choice(empty_cells)
         grille[row][col] = debut_chiffre()
-
-                
-                
+              
 def update_grid():
     #Permet de mettre à jour l'affichage de la grille avec les nouvelles valeurs de la grille
     for i in range(4):
@@ -229,9 +227,7 @@ def move_left():
         verifier_fin_de_jeu_ou_pas(grille)
         verifie_gagne_ou_pas()
 
-
-
-
+        
 #Création d'une fonction qui permet de faire bouger les tuiles vers la droite
 def move_right():
     global grille, score
@@ -269,11 +265,7 @@ def verifie_gagne_ou_pas():
     if 2048 in grille :
         print("Gagné")
 
-
-
-
-
-
+        
 #Création d'une fonction qui permet de générer une nouvelle partie de jeux 
 def recommencer_partie():
     global grille, score
