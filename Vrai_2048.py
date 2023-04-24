@@ -89,14 +89,15 @@ def aléatoire_départ():
 #Création d'une fonction permettant de générer un nombre aléatoire, soit 2 ou 4
 #Sachant que le chiffre 2 a 9 fois plus de chance d'apparaitre que le chiffre 4
 def debut_chiffre():
-    #Générer un chiffre aléatoire entre 0 et 10 inclus 
-    chiffre_aleatoire = random.randint(0, 10)
-    #Si le nombre aléatoirement généré est inferieur ou égal à 9, le chiffre 2 est retourné 
-    if chiffre_aleatoire <= 9:
+    #Générer un chiffre aléatoire entre 0 et 9 inclus 
+    chiffre_aleatoire = random.randint(0, 9)
+    #Si le nombre aléatoirement généré est inferieur ou égal à 8, le chiffre 2 est retourné 
+    if chiffre_aleatoire <= 8:
         return 2
     #Dans le cas contraire, c'est le chiffre 4 qui est retourné
     else:
         return 4
+    
 #Création d'un widget qui affiche le score en tant réel du joueur    
 score_affichage = tk.Label(racine, text=f"Score = {score}")
 
@@ -272,7 +273,6 @@ def verifier_fin_de_jeu_ou_pas(grille):
 
                
  
-
 #Création d'une fonction qui vérifie si le joueur a reussi à obtenir une tuile avec le nombre 2048 dedans
 #Si c'est le cas, un message disant que le joueur a gagné s'affiche
 def verifie_gagne_ou_pas():
