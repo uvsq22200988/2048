@@ -254,12 +254,24 @@ def move_right():
         verifie_gagne_ou_pas()
 
 
+#Création d'une fonction qui vérifie si le joueur peut encore faire bouger les tuiles 
+def verifier_fin_de_jeu_ou_pas(grille):
+    # Vérifie s'il est possible de déplacer une case horizontalement ou verticalement
+    for row in range(4):
+        for col in range(4):
+            # Vérifie s'il reste des cases vides dans la grille
+            if grille[row][col] == 0:
+                return False
+            # Vérifie s'il est possible de fusionner deux cases adjacentes horizontalement ou verticalement
+            elif (col < 3 and grille[row][col] == grille[row][col+1]) or (row < 3 and grille[row][col] == grille[row+1][col]) or (col > 0 and grille[row][col] == grille[row][col-1]) or (row > 0 and grille[row][col] == grille[row-1][col]):
+                return False 
+    
+    
+    # Sinon, il reste des cases vides, on peut encore ajouter un chiffre
+    messagebox.showinfo("Game Over", "Vous avez perdu, en effet, vous ne pouvez plus bouger les tuiles,  vous êtes invités à appuyer sur le bouton nouvelle partie")    
 
-        
-        
-        
-
-
+               
+ 
 
 #Création d'une fonction qui vérifie si le joueur a reussi à obtenir une tuile avec le nombre 2048 dedans
 #Si c'est le cas, un message disant que le joueur a gagné s'affiche
