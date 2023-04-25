@@ -29,8 +29,8 @@ def debut_2048():
         rectangles_ligne = []
         # La variable 'col' représente l'indice de la colonne variant de 0 à 3
         for col in range(4):
-            # Dimensions des boutons, ils font tous une largeur de 20 et une hauteur de 10
-            rectangle = tk.Button(racine, text="", width=20, height=10, font=("helvatica",17))
+            # Dimensions des boutons, ils font tous une largeur de 10 et une hauteur de 5
+            rectangle = tk.Button(racine, text="", width=10, height=5, font=("helvatica",17))
             # Le bouton est ensuite positionné dans la grille en utilisant les coordonnées de la ligne et de la colonne actuelles
             rectangle.grid(row=i, column=col)
             # Les boutons sont stockés dans la liste appellée 'rectangles'
