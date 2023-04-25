@@ -89,14 +89,15 @@ def aléatoire_départ():
 #Création d'une fonction permettant de générer un nombre aléatoire, soit 2 ou 4
 #Sachant que le chiffre 2 a 9 fois plus de chance d'apparaitre que le chiffre 4
 def debut_chiffre():
-    #Générer un chiffre aléatoire entre 0 et 10 inclus 
-    chiffre_aleatoire = random.randint(0, 10)
-    #Si le nombre aléatoirement généré est inferieur ou égal à 9, le chiffre 2 est retourné 
-    if chiffre_aleatoire <= 9:
+    #Générer un chiffre aléatoire entre 0 et 9 inclus 
+    chiffre_aleatoire = random.randint(0, 9)
+    #Si le nombre aléatoirement généré est inferieur ou égal à 8, le chiffre 2 est retourné 
+    if chiffre_aleatoire <= 8:
         return 2
     #Dans le cas contraire, c'est le chiffre 4 qui est retourné
     else:
         return 4
+    
 #Création d'un widget qui affiche le score en tant réel du joueur    
 score_affichage = tk.Label(racine, text=f"Score = {score}")
 
@@ -140,9 +141,7 @@ def aléatoire_chiffre():
         #Permet de choisir un emplacement vide aléatoire et mettre un chiffre 2 ou 4
         row, col = random.choice(empty_cells)
         grille[row][col] = debut_chiffre()
-
-                
-                
+              
 def update_grid():
     #Permet de mettre à jour l'affichage de la grille avec les nouvelles valeurs de la grille
     for i in range(4):
@@ -229,25 +228,110 @@ def move_left():
         verifie_gagne_ou_pas()
 
 
+#Création d'une fonction qui permet de faire bouger les tuiles vers le bas       
+def move_down():
+    global grille, score
+    moved = False
+    for col in range(4):
+        for row in range(2, -1, -1):
+            if grille[row][col] != 0:
+                r = row
+                while r < 3 and grille[r+1][col] == 0:
+                    grille[r+1][col] = grille[r][col]
+                    grille[r][col] = 0
+                    r += 1
+                    moved = True
+                if r < 3 and grille[r+1][col] == grille[r][col]:
+                    grille[r+1][col] *= 2
+                    score += grille[r+1][col]
+                    grille[r][col] = 0
+                    moved = True
+    if moved:
+        aléatoire_chiffre()
+        maj_score()
+        update_grid()
+        verifier_fin_de_jeu_ou_pas(grille)
+        verifie_gagne_ou_pas()
+
+            
+#Création d'une fonction qui permet de faire bouger les tuiles vers la gauche         
+def move_left():
+    global grille, score
+    moved = False
+    for row in range(4):
+        for col in range(1, 4):
+            if grille[row][col] != 0:
+                c = col
+                while c > 0 and grille[row][c-1] == 0:
+                    grille[row][c-1] = grille[row][c]
+                    grille[row][c] = 0
+                    c -= 1
+                    moved = True
+                if c > 0 and grille[row][c-1] == grille[row][c]:
+                    grille[row][c-1] *= 2
+                    score += grille[row][c-1]
+                    grille[row][c] = 0
+                    moved = True
+    if moved:
+        aléatoire_chiffre()
+        maj_score()
+        update_grid()
+        verifier_fin_de_jeu_ou_pas(grille)
+        verifie_gagne_ou_pas()
+
+        
+#Création d'une fonction qui permet de faire bouger les tuiles vers la droite
+def move_right():
+    global grille, score
+    moved = False
+    for row in range(4):
+        for col in range(2, -1, -1):
+            if grille[row][col] != 0:
+                c = col
+                while c < 3 and grille[row][c+1] == 0:
+                    grille[row][c+1] = grille[row][c]
+                    grille[row][c] = 0
+                    c += 1
+                    moved = True
+                if c < 3 and grille[row][c+1] == grille[row][c]:
+                    grille[row][c+1] *= 2
+                    score += grille[row][c+1]
+                    grille[row][c] = 0
+                    moved = True
+    if moved:
+        aléatoire_chiffre()
+        maj_score()
+        update_grid()
+        verifier_fin_de_jeu_ou_pas(grille)
+        verifie_gagne_ou_pas()
 
 
+#Création d'une fonction qui vérifie si le joueur peut encore faire bouger les tuiles 
+def verifier_fin_de_jeu_ou_pas(grille):
+    # Vérifie s'il est possible de déplacer une case horizontalement ou verticalement
+    for row in range(4):
+        for col in range(4):
+            # Vérifie s'il reste des cases vides dans la grille
+            if grille[row][col] == 0:
+                return False
+            # Vérifie s'il est possible de fusionner deux cases adjacentes horizontalement ou verticalement
+            elif (col < 3 and grille[row][col] == grille[row][col+1]) or (row < 3 and grille[row][col] == grille[row+1][col]) or (col > 0 and grille[row][col] == grille[row][col-1]) or (row > 0 and grille[row][col] == grille[row-1][col]):
+                return False 
+    
+    
+    # Sinon, il reste des cases vides, on peut encore ajouter un chiffre
+    messagebox.showinfo("Game Over", "Vous avez perdu, en effet, vous ne pouvez plus bouger les tuiles,  vous êtes invités à appuyer sur le bouton nouvelle partie")    
 
+               
+ 
+#Création d'une fonction qui vérifie si le joueur a reussi à obtenir une tuile avec le nombre 2048 dedans
+#Si c'est le cas, un message disant que le joueur a gagné s'affiche
+def verifie_gagne_ou_pas():
+    global grille 
+    if 2048 in grille :
+        print("Gagné")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 #Création d'une fonction qui permet de générer une nouvelle partie de jeux 
 def recommencer_partie():
     global grille, score
